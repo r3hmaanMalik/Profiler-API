@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Agent Websites</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Website link</th>
+      <th>Website api key</th>
+      <th>Agent</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @agent_websites.each do |agent_website| %>
+      <tr>
+        <td><%= agent_website.website_link %></td>
+        <td><%= agent_website.website_api_key %></td>
+        <td><%= agent_website.agent.first_name %></td>
+        <td><%= link_to 'Regenerate', agent_website %></td>
+        <td><%= link_to 'Edit', edit_agent_website_path(agent_website) %></td>
+        <td><%= link_to 'Destroy', agent_website, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Agent Website', new_agent_website_path %>

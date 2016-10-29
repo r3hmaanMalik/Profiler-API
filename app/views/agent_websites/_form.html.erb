@@ -1,0 +1,22 @@
+<%= form_for(agent_website) do |f| %>
+  <% if agent_website.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(agent_website.errors.count, "error") %> prohibited this agent_website from being saved:</h2>
+
+      <ul>
+      <% agent_website.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :website_link %>
+    <%= f.text_field :website_link %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
