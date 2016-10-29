@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,3 +23,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# Profiler-API
+>>>>>>> b82c294b9b4c5b7756ea5c646a6ad67a2e0ba4b5
