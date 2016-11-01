@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+  <%= form_tag dummies_path ,method: 'GET'  do %>
+    <%= text_field_tag :product_name %>
+  <% end %>
+
+<%= @sets.first.item if @sets%>
+<br><br><br>
+<%= @arr %>

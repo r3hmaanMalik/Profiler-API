@@ -5,7 +5,7 @@ class AgentWebsitesController < ApplicationController
   # GET /agent_websites
   # GET /agent_websites.json
   def index
-    @agent_websites = AgentWebsite.all
+    @agent_websites = current_agent.agent_websites
   end
 
   # GET /agent_websites/1

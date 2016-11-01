@@ -12,17 +12,20 @@
 
 class AgentWebsite < ApplicationRecord
   belongs_to :agent
-
   before_save do
 		create_website_api_key(self)   	
   end
 
   def create_website_api_key(website)
-  	website.website_api_key =  Base64.encode64((0...50).map { ('a'..'z').to_a[rand(26)] }.join)	
-  end
+	str =  Base64.encode64((0...20).map { ('a'..'z').to_a[rand(26)] }.join)	
+	str = str[0..str.length-2]
+	website.website_api_key = str  
+	end
 
   def self.create_website_api_key2(website)
-  	website.website_api_key =  Base64.encode64((0...50).map { ('a'..'z').to_a[rand(26)] }.join)	
+		str =  Base64.encode64((0...20).map { ('a'..'z').to_a[rand(26)] }.join)     
+    str = str[0..str.length-2]
+    website.website_api_key = str
   	website.save!
   end
 

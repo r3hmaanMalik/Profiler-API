@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161029232232) do
+ActiveRecord::Schema.define(version: 20161101012939) do
 
   create_table "agent_websites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "website_link"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20161029232232) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["agent_id"], name: "index_agent_websites_on_agent_id", using: :btree
+    t.index ["website_api_key"], name: "index_agent_websites_on_website_api_key", using: :btree
   end
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -43,6 +44,12 @@ ActiveRecord::Schema.define(version: 20161029232232) do
     t.index ["reset_password_token"], name: "index_agents_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "dummies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "fis_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "frequent_item_sets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "item",       limit: 65535
     t.datetime "created_at",               null: false
@@ -58,6 +65,16 @@ ActiveRecord::Schema.define(version: 20161029232232) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.index ["name"], name: "index_products_on_name", using: :btree
+  end
+
+  create_table "profilers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "agent_website_id"
+    t.string   "user_session_key"
+    t.datetime "expiry_time"
+    t.text     "visited",          limit: 65535
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["agent_website_id"], name: "index_profilers_on_agent_website_id", using: :btree
   end
 
   create_table "visitor_profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -76,6 +93,7 @@ ActiveRecord::Schema.define(version: 20161029232232) do
   end
 
   add_foreign_key "agent_websites", "agents"
+  add_foreign_key "profilers", "agent_websites"
   add_foreign_key "visitors_profile_products", "products"
   add_foreign_key "visitors_profile_products", "visitor_profiles"
 end
